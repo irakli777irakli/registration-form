@@ -1,0 +1,10 @@
+.registration_starter_page_col{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to top left, #e2e7e5, #eef1ed);
+  }
+
+  

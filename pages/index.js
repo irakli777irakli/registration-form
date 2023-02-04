@@ -1,4 +1,5 @@
-import styles from '@/styles/Home.module.css'
+import Navbar from '@/components/Navbar';
+import PagesMainWrapper from '@/components/PagesWrapper/PagesMainWrapper';
 import { useRouter } from 'next/router';
 
 
@@ -10,11 +11,8 @@ export default function Home() {
 
   
   return (
-    <section className="registration_starter_page">
-      <nav className="registration_nav">
-        <h1 className="company_name">REDBERRY</h1>
-        <hr/>
-      </nav>
+    <PagesMainWrapper>
+     <Navbar title={"REDBERRY"}/>
      <div className="addBtn_logo_wrapper">
         <button type='button' className="add_resume_btn" onClick={() =>router.push("/generalNews/1")}>
           რეზიუმეს დამატება
@@ -31,7 +29,7 @@ export default function Home() {
         </div>
       </div>
      
-    </section>
+      </PagesMainWrapper>
    
   )
 }
