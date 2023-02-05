@@ -11,3 +11,87 @@
   }
 
 
+
+  /* GeneralInfoForms */
+  .all_fields_wrapper{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 2rem;
+    
+  }
+  .name_surname_wrapper{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+   
+  }
+  .name_wrapper{
+    flex:1;
+  }
+  .surname_wrapper{
+    flex:1;
+  }
+  .file_upload_wrapper{
+    display: flex;
+    gap: 1rem;
+  }
+  .email_number_wrapper{
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ReussableForm styling */
+  
+  .success{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #98E37E;
+    color: white;
+    right: 5%;
+    top: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .error{
+    position: absolute;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    width: 20px;
+    height: 20px;
+    background-color: #F02424;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 20%;
+    right: -4%;
+  }
+  .half_input{
+    width: 95%;
+    padding: 0.5rem 0.7rem;
+    font-family: "HelveticaNeue", sans-serif;
+    font-size: 1rem;
+ 
+}
+  .upload_button{
+   background-color: rgb(73, 73, 245);
+   color: white;
+   border: none;
+  
+   
+  }
+  .full_textarea{
+    width: 100%;
+    resize: none;
+  
+  }
+  .full_input{
+    width: 100%;
+    padding: 0.5rem 0.7rem;
+   
+  }
+
+

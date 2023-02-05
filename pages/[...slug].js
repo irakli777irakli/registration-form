@@ -12,7 +12,7 @@ const engToGeo = {
 function GenericValidationForm() {
     const router = useRouter();
     const urlInfo = router.query.slug;
-    console.log(urlInfo);
+    // console.log(urlInfo);
     return (
       <PagesMainWrapper>
     {urlInfo && <Navbar currentPage={urlInfo} title={engToGeo[urlInfo[0]]}/>}

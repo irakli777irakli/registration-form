@@ -6,14 +6,15 @@ const AppProvider = ({ children }) => {
   
 
   const [generalInfo,setGeneralInfo] = useState({
-    name: "",
-    surname: "",
-    photo: "",
+    name: ["",false],
+    surname: ["",false],
+    photo: ["",false],
     aboutMe: "",
-    mail: "",
-    phoneNumber: "",
+    email: ["",false],
+    phoneNumber: ["",false],
+   
   });
-
+  
 
   return (
     <AppContext.Provider
