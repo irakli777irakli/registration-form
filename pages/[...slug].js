@@ -14,7 +14,7 @@ function GenericValidationForm() {
     const urlInfo = router.query.slug;
     console.log(urlInfo);
     return (
-      <PagesMainWrapper row={true}>
+      <PagesMainWrapper>
     {urlInfo && <Navbar currentPage={urlInfo} title={engToGeo[urlInfo[0]]}/>}
     </PagesMainWrapper>
   )
