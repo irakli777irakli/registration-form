@@ -41,13 +41,7 @@
     font-size: 2rem;
     font-family: "HelveticaNeue", sans-serif;
   }
-  .company_name{
-    color: rgb(245, 53, 53);
-
-  }
-  .genericPageNames {
-    color: black;
-  }
+ 
   .nav_hr{
     height: 2px;
     background-color: black;

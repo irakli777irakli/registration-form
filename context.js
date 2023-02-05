@@ -5,14 +5,19 @@ const AppContext = React.createContext()
 const AppProvider = ({ children }) => {
   
 
+  const [generalInfo,setGeneralInfo] = useState({
+    name: "",
+    surname: "",
+    photo: "",
+    aboutMe: "",
+    mail: "",
+    phoneNumber: "",
+  });
 
-  
 
-       
-  
   return (
     <AppContext.Provider
-      value={"value"}
+      value={{generalInfo,setGeneralInfo}}
     >
       {children}
     </AppContext.Provider>

@@ -3,6 +3,9 @@ import { useState } from "react";
 import {MdOutlineArrowBackIos} from 'react-icons/md'
 import InfoSide from "./InfoPage/InfoSide";
 import styles from './Navbar.module.css'
+import GeneralInfoForm from "./ValidationForms/GeneralInfoForm";
+import Hero from "./ValidationForms/Hero";
+import TitleHero from "./ValidationForms/TitleHero";
 
 
 const possibleRoutes = ["/generalNews/1","/experience/2","/education/3","/result/4"];
@@ -33,7 +36,10 @@ function Navbar({currentPage = [], title, }) {
     function displayPageIndexer() {
         return (
             <div className={styles.title_pageIndxer}>
-            <h1 className={Number(numeric) ? styles.genericPageNames : styles.company_name}>{title}</h1>
+                <TitleHero color={"black"}>
+                {title}
+                </TitleHero >
+            {/* <h1 className={Number(numeric) ? styles.genericPageNames : styles.company_name}></h1> */}
             <p>{numeric}/3</p>
             </div>
         )
@@ -47,11 +53,15 @@ function Navbar({currentPage = [], title, }) {
        {/* will update this logic in more concise way. */}
        <div className={Number(numeric) > 0 ? styles.title_hr_wrapper : styles.title_hr_wrapper_home}>
              {Number(numeric) ?  displayPageIndexer()
-            :    
-            <h1 className={Number(numeric) ? styles.genericPageNames : styles.company_name}>{title}</h1>
+            : 
+            <TitleHero  color={"red"}>
+                {title}
+            </TitleHero>   
+            //<h1 className={Number(numeric) ? styles.genericPageNames : styles.company_name}>{title}</h1>
 
         }
             <hr className={styles.nav_hr}/>
+            {Number(numeric)> 0 && <GeneralInfoForm />}
         </div>
         {Number(numeric) > 0 && <InfoSide />}
 

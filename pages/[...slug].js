@@ -16,6 +16,7 @@ function GenericValidationForm() {
     return (
       <PagesMainWrapper>
     {urlInfo && <Navbar currentPage={urlInfo} title={engToGeo[urlInfo[0]]}/>}
+    
     </PagesMainWrapper>
   )
 }
