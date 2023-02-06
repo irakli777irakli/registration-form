@@ -14,11 +14,20 @@ const AppProvider = ({ children }) => {
     phoneNumber: ["",false],
    
   });
-  
 
+  const getFromLC = async() => {
+    const data = await  JSON.parse(localStorage.getItem("generalP"));
+    if(data){
+      setGeneralInfo(data);
+    }
+  }
+  
+  useEffect(()=> {
+    getFromLC()
+  },[])
   return (
     <AppContext.Provider
-      value={{generalInfo,setGeneralInfo}}
+      value={{generalInfo,setGeneralInfo,getFromLC}}
     >
       {children}
     </AppContext.Provider>

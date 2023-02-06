@@ -21,6 +21,7 @@ function Navbar({currentPage = [], title, }) {
             router.push(possibleRoutes[exists - 1]);
         }
     }
+   
 
 
     function displayGoBackBtn(hidden = false) {
