@@ -9,7 +9,7 @@ const AppProvider = ({ children }) => {
     name: ["",false],
     surname: ["",false],
     photo: ["",false],
-    aboutMe: "",
+    aboutMe: [""],
     email: ["",false],
     phoneNumber: ["",false],
    

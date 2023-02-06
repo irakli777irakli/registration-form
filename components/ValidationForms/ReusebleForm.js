@@ -1,5 +1,5 @@
 import { useGlobalContext } from '@/context';
-import { georgianCheck } from '@/utils/helper';
+import { georgianCheck, phoneNumberChecker } from '@/utils/helper';
 import { useEffect, useState } from 'react';
 import Hero from './Hero';
 import styles from './Validation.module.css';
@@ -8,10 +8,8 @@ function ReusebleForm({fieldType,inputName,inputPlaceholder,specStyle, onlyTextA
 
   const {generalInfo,setGeneralInfo} = useGlobalContext();
 
-
-
-  function errorSuccess(isGeo,iName) {
-    if(isGeo){
+  function errorSuccess(validState) {
+    if(validState){
       return generalInfo[inputName][1] = true;
       
     }else{
@@ -21,19 +19,43 @@ function ReusebleForm({fieldType,inputName,inputPlaceholder,specStyle, onlyTextA
   }
   
   function displayInfo(e,iName) {
-  
     // dynammically update values in state, dictionary hack
-  const value =   generalInfo[iName][0] = e.target.value;
+  let value =   generalInfo[iName][0] = e.target.value;
+  // use arra ot store, input value and it's state `error or success`.
+  // implement email and number s tmr
   let state;
+  let isGeo;
   if(iName === "name"){
-    let isGeo = georgianCheck(value);
+    isGeo = georgianCheck(value);
     state = errorSuccess(isGeo)
-  }else if(iName === "surname"){
-    let isGeo = georgianCheck(value);
+  }
+  else if(iName === "surname"){
+    isGeo = georgianCheck(value);
     state = errorSuccess(isGeo)
-  }else if(iName === "aboutMe"){
-    let isGeo = georgianCheck(value);
-    state = errorSuccess(isGeo)
+  }
+  else if(iName === "photo"){
+   if(value !== undefined){
+    errorSuccess(true)
+   }else{
+    errorSuccess(false);
+   }
+  }
+  else if(iName === "email"){
+    const isCorrectEmail = value.includes("@redberry.ge");
+    const isEmpty = value.split('').every((el)=> el !== " ");
+    if(isEmpty && isCorrectEmail){
+      state = errorSuccess(isCorrectEmail);
+    }else{
+      state = errorSuccess(false);
+    }
+    
+  }
+  else if(iName === "phoneNumber"){
+   const {isValidNumber,finalOutput} = phoneNumberChecker(value);
+    state = errorSuccess(isValidNumber);
+    if(finalOutput){
+      value = generalInfo[iName][0] = finalOutput;
+    }
   }
   
   setGeneralInfo({...generalInfo,state});
@@ -50,7 +72,7 @@ function ReusebleForm({fieldType,inputName,inputPlaceholder,specStyle, onlyTextA
    {onlyTextArea ? 
    
    <textarea className={styles[specStyle]} cols={10} rows={10}
-   placeholder={inputPlaceholder} value={generalInfo[inputName]} name={inputName} onChange={(e) => displayInfo(e,inputName)} />
+   placeholder={inputPlaceholder} value={generalInfo[inputName][0]} name={inputName} onChange={(e) => displayInfo(e,inputName)} />
     :
   
     <div style={{position:"relative",widows:"100%"}}>
