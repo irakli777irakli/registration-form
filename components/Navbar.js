@@ -1,38 +1,17 @@
-import { useRouter } from "next/router";
-import { useState } from "react";
-import {MdOutlineArrowBackIos} from 'react-icons/md'
 import InfoSide from "./InfoPage/InfoSide";
 import styles from './Navbar.module.css'
+import ExperienceForm from "./ValidationForms/ExperienceForm";
 import GeneralInfoForm from "./ValidationForms/GeneralInfoForm";
-import Hero from "./ValidationForms/Hero";
+
 import TitleHero from "./ValidationForms/TitleHero";
+import ZadniBtn from "./ZadniBtn/ZadniBtn";
 
 
-const possibleRoutes = ["/generalNews/1","/experience/2","/education/3","/result/4"];
+
 
 function Navbar({currentPage = [], title, }) {
-    const router = useRouter();
+    
     const [pageName,numeric] = currentPage;
-    function goToPrevPage() {
-        const exists = possibleRoutes.indexOf(`/${pageName}/${numeric}`)
-        if(exists === -1 || exists === 0){
-            router.push("/")
-        }else{
-            router.push(possibleRoutes[exists - 1]);
-        }
-    }
-   
-
-
-    function displayGoBackBtn(hidden = false) {
-        return (
-            <div className={hidden ? `${styles.go_back_btn_wrapper} ${styles.hidden}` : `${styles.go_back_btn_wrapper}`}>
-        <button  onClick={() => goToPrevPage()}>
-           <MdOutlineArrowBackIos size={25} color={"black"} cursor={"pointer"} />
-    </button>
-       </div>  
-        )
-    }
 
     function displayPageIndexer() {
         return (
@@ -49,8 +28,8 @@ function Navbar({currentPage = [], title, }) {
   return (
 
     <nav className={styles.registration_nav}>
-        {/* in order to maintain 10% and 90 % ration between `backBtn` and `mainNan`*/}
-       {Number(numeric) > 0 ? displayGoBackBtn() : displayGoBackBtn(true)}
+        {/* in order to maintain 10% and 40 % ration between `backBtn` and `mainNan`*/}
+       {Number(numeric) > 0 ?  <ZadniBtn /> :  <ZadniBtn hidden={true}/> }
        {/* will update this logic in more concise way. */}
        <div className={Number(numeric) > 0 ? styles.title_hr_wrapper : styles.title_hr_wrapper_home}>
              {Number(numeric) ?  displayPageIndexer()
@@ -62,7 +41,8 @@ function Navbar({currentPage = [], title, }) {
 
         }
             <hr className={styles.nav_hr}/>
-            {Number(numeric)> 0 && <GeneralInfoForm />}
+            {Number(numeric) === 1 && <GeneralInfoForm />}
+            {Number(numeric) === 2 && <ExperienceForm />}
         </div>
         {Number(numeric) > 0 && <InfoSide />}
 

@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     width: 50%;
-    flex-wrap: wrap;
+    align-self: stretch;
 }
 .generalInfoP_wrapper{
     display: flex;
@@ -38,9 +38,30 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    
-
 }
-.hide{
-    visibility: hidden;
+.person_img{
+    border-radius: 50%;
+}
+
+/* experinceP */
+.experienceP{
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.experienceInfo_wrapper,.job_info_wrapper{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+.job_info_wrapper{
+    color: gray;
+    flex-direction: row;
+}
+.position_employer_wrapper{
+    display: flex;
+    gap: 1rem;
 }

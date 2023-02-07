@@ -1,12 +1,12 @@
 import { useGlobalContext } from '@/context';
 import { georgianCheck, phoneNumberChecker } from '@/utils/helper';
 import { useEffect, useState } from 'react';
-import Hero from './Hero';
+
 import styles from './Validation.module.css';
 
 function ReusebleForm({fieldType,inputName,inputPlaceholder,specStyle, onlyTextArea = false,acceptance}) {
 
-  const {generalInfo,setGeneralInfo} = useGlobalContext();
+  const {generalInfo,setGeneralInfo,getFromLC,exprerience,setExperience} = useGlobalContext();
 
   function errorSuccess(validState) {
     if(validState){
@@ -42,9 +42,16 @@ function ReusebleForm({fieldType,inputName,inputPlaceholder,specStyle, onlyTextA
     fr.addEventListener("load",() => {
       // assigning freader value to state and refferencing it to `newVal`
       // saving only happens inside `this` eventListener
+      try{
       const newVal =  generalInfo[iName][0] =  fr.result;
       setGeneralInfo({...generalInfo,newVal});
-      localStorage.setItem("generalP",JSON.stringify(generalInfo))
+      localStorage.setItem("generalP",JSON.stringify(generalInfo));
+      }
+      catch(e){
+        alert("photo sized more than 1mb can not be uploaded");
+        // get back to current state values using LC
+        getFromLC();
+      }
     });
    
     if(value){

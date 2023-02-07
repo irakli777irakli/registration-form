@@ -14,6 +14,26 @@ const AppProvider = ({ children }) => {
     phoneNumber: ["",false],
    
   });
+ 
+
+  const [experienceAndEducation,setExperienceAndEducation] = useState({
+    experience:[{
+      id: 0,
+      position: ["",false],
+      employer: ["",false],
+      job_start_date: ["",false],
+      job_end_date: ["",false],
+      description: ["",false]
+    }],
+    education: [{ 
+      id: 0,
+      school: ["",false],
+      degree: ["",false],
+      schoool_end_date: ["",false],
+      description: ["",false]
+    }]
+    
+});
 
   const getFromLC = async() => {
     const data = await  JSON.parse(localStorage.getItem("generalP"));
@@ -27,7 +47,7 @@ const AppProvider = ({ children }) => {
   },[])
   return (
     <AppContext.Provider
-      value={{generalInfo,setGeneralInfo,getFromLC}}
+      value={{generalInfo,setGeneralInfo,getFromLC,experienceAndEducation,setExperienceAndEducation}}
     >
       {children}
     </AppContext.Provider>

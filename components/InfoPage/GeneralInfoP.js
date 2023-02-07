@@ -1,5 +1,4 @@
 import styles from './InfoSide.module.css'
-
 import React, { useEffect } from 'react'
 import { useGlobalContext } from '@/context'
 import TitleHero from '../ValidationForms/TitleHero';
@@ -14,6 +13,7 @@ function GeneralInfoP() {
 
 
   return (
+    <>
     <div className={styles.generalInfoP_wrapper}>
         <div className={styles.generalInfoP_l}>
             <TitleHero color={"red"}>
@@ -29,9 +29,14 @@ function GeneralInfoP() {
         </div>
     </div>
     <div className={styles.generalInfoP_r}>
-        {generalInfo?.photo[0] !== ""  && <Image src={generalInfo?.photo[0]} alt="image" width={200} height={200} />}
+        {generalInfo?.photo[0] !== ""  && 
+        <Image src={generalInfo?.photo[0]} alt="image" width={200} height={200} className={styles.person_img}/>}
+  
     </div>
   </div>
+  <hr />
+ </>
+  
   )
 }
 
