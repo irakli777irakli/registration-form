@@ -1,6 +1,9 @@
-.sumbit_btn{
+.sumbit_btn,.prev_btn{
     padding: 0.5rem 0.7rem;
     color: white;
     background-color: purple;
     align-self: flex-end;
+}
+.prev_btn{
+    align-self: flex-start;
 }

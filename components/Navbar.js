@@ -42,7 +42,8 @@ function Navbar({currentPage = [], title, }) {
         }
             <hr className={styles.nav_hr}/>
             {Number(numeric) === 1 && <GeneralInfoForm />}
-            {Number(numeric) === 2 && <ExperienceForm />}
+            {Number(numeric) === 2 && <ExperienceForm currentPageName={"experience"}/>}
+            {Number(numeric) === 3 && <ExperienceForm currentPageName={"education"}/>}
         </div>
         {Number(numeric) > 0 && <InfoSide />}
 

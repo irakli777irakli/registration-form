@@ -7,7 +7,9 @@ function AddMoreBtn({text}) {
     const {addExperience} = useGlobalContext();
 
   return (
-    <button type='button' onClick={() => addExperience()} className={styles.add_more}>{text}</button>
+    <button type='button' onClick={() => addExperience()} className={styles.add_more}>
+      {text}
+      </button>
   )
 }
 

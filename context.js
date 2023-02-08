@@ -29,14 +29,15 @@ const AppProvider = ({ children }) => {
       id: 0,
       school: ["",false],
       degree: ["",false],
-      schoool_end_date: ["",false],
-      description: ["",false]
+      school_end_date: ["",false],
+      ed_desc: ["",false]
     }]
     
 });
 
 
 const [experienceFormCount,setExperienceFormCount] = useState(1);
+
 
   const addExperience = () => {
     setExperienceFormCount(experienceFormCount + 1);
@@ -49,21 +50,43 @@ const [experienceFormCount,setExperienceFormCount] = useState(1);
       description: ["",false]
     }
     const newField = [...experienceAndEducation.experience,newExperienceField];
-  
-    console.log(newField)
     setExperienceAndEducation({...experienceAndEducation,experience:[...newField]})
-    console.log(experienceAndEducation)
+   
   }
 
 
-  const getFromLC = async() => {
-    const data = await  JSON.parse(localStorage.getItem("generalP"));
+  async function getDegreesData(){
+    const response = await fetch("https://resume.redberryinternship.ge/api/degrees");
+    const data = await response.json();
     if(data){
-      setGeneralInfo(data);
+      const educationField = { 
+        id: 0,
+        school: ["",false],
+        degree: [data,false],
+        school_end_date: ["",false],
+        ed_desc: ["",false]
+      }
+      
+      setExperienceAndEducation({...experienceAndEducation,education:[educationField]})
+    }
+    
+
+
+  }
+
+  const getFromLC = async() => {
+    const generalPData = await  JSON.parse(localStorage.getItem("generalP"));
+    const experiencePData = await  JSON.parse(localStorage.getItem("experienceP"));
+    if(generalPData){
+      setGeneralInfo(generalPData);
+    }
+    if(experiencePData){
+      setExperienceAndEducation(experiencePData);
     }
   }
   
   useEffect(()=> {
+    getDegreesData();
     getFromLC()
   },[])
   return (

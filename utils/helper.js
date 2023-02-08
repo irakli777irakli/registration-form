@@ -70,6 +70,12 @@ export function phoneNumberChecker(value){
     }
 
 
+const possibleRoutes = ["/generalNews/1","/experience/2","/education/3","/result/4"];
+export function urlNavigator(index){
+    return possibleRoutes[index];
+}
+
+
 
 
 

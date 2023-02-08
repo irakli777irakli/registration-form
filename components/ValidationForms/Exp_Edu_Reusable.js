@@ -2,7 +2,7 @@ import { useGlobalContext } from '@/context'
 import React, { useEffect } from 'react'
 import styles from './Validation.module.css';
 
-function Exp_Edu_Reusable({currentFieldId,whichPage,fieldType,inputName,inputPlaceholder,specStyle, onlyTextArea = false}) {
+function Exp_Edu_Reusable({isSelect,currentFieldId,whichPage,fieldType,inputName,inputPlaceholder,specStyle, onlyTextArea = false}) {
 
     const {experienceAndEducation,setExperienceAndEducation} = useGlobalContext();
 
@@ -61,12 +61,15 @@ function Exp_Edu_Reusable({currentFieldId,whichPage,fieldType,inputName,inputPla
         }
       });
       //console.log(updatedValue);
-      setExperienceAndEducation({...experienceAndEducation,updatedValue})
+      setExperienceAndEducation({...experienceAndEducation,updatedValue});
+      localStorage.setItem("experienceP",JSON.stringify(experienceAndEducation))
       
   }
 
     function getInputValue(val){
+        
           const item = experienceAndEducation[`${whichPage}`]?.find((el) => el.id === currentFieldId);
+          
           if(val){
             return item[inputName][1];
 
@@ -90,7 +93,13 @@ function Exp_Edu_Reusable({currentFieldId,whichPage,fieldType,inputName,inputPla
      </div>
     :
     <div style={{position:"relative",width:"100%"}}>
-    <input className={styles[specStyle]}  type={`${fieldType}`} value={getInputValue()} placeholder={inputPlaceholder} onChange={(e) => displayFielsText(e)} />
+  <input className={styles[specStyle]}  type={`${fieldType}`}
+     value={getInputValue()} placeholder={inputPlaceholder}
+      onChange={(e) => displayFielsText(e)} />
+   {/* implement select option stuff conditionally */}
+
+    
+    
     {getInputValue(true) ? <span className={styles.success}>✓</span> 
       :
       <span className={styles.error}>!</span>}

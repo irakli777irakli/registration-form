@@ -1,10 +1,11 @@
 import { useGlobalContext } from '@/context';
+import { urlNavigator } from '@/utils/helper';
 import { useRouter } from 'next/router';
 import NextBtn from '../NextBtn/NextBtn';
 import Hero from './Hero';
 import ReusebleForm from './ReusebleForm';
 import styles from './Validation.module.css';
-const possibleRoutes = ["/generalNews/1","/experience/2","/education/3","/result/4"];
+
 
  // function goToPrevPage() {
     //     const exists = possibleRoutes.indexOf(`/${pageName}/${numeric}`)
@@ -23,7 +24,8 @@ function GeneralInfoForm() {
     e.preventDefault();
     if(generalInfo["name"][1] && generalInfo["surname"][1] &&
      generalInfo["photo"][1] && generalInfo["email"][1] && generalInfo["phoneNumber"][1]){
-      router.push(possibleRoutes[1]);
+      const path = urlNavigator(1)
+      router.push(path);
      }
   }
 
@@ -65,7 +67,7 @@ function GeneralInfoForm() {
           <ReusebleForm currentPage={generalInfo} specStyle={"full_input"} fieldType={"text"} inputName={"phoneNumber"} inputPlaceholder={"+995 3551 12 34 56"}/>
         </div>
         </div>
-        <NextBtn />
+        <NextBtn  next={true} text={"შემდეგი"}/>
         </form>
     </section>
   )

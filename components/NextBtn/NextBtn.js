@@ -1,8 +1,8 @@
 import styles from './NextBtn.module.css';
-function NextBtn() {
+function NextBtn({next,text}) {
   return (
-    <button type="submit" className={styles.sumbit_btn}>
-        შემდეგი
+    <button type={next ? "submit" : "button"} className={next ? styles.sumbit_btn : styles.prev_btn}>
+        {text}
     </button>
   )
 }

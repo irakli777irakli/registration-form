@@ -84,7 +84,7 @@ function ReusebleForm({fieldType,inputName,inputPlaceholder,specStyle, onlyTextA
   setGeneralInfo({...generalInfo,value});
   localStorage.setItem("generalP",JSON.stringify(generalInfo))
     
-  console.log(generalInfo)
+  // console.log(generalInfo)
   }
 
 
