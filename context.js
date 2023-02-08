@@ -35,6 +35,27 @@ const AppProvider = ({ children }) => {
     
 });
 
+
+const [experienceFormCount,setExperienceFormCount] = useState(1);
+
+  const addExperience = () => {
+    setExperienceFormCount(experienceFormCount + 1);
+    const newExperienceField = {
+      id: experienceFormCount,
+      position: ["",false],
+      employer: ["",false],
+      job_start_date: ["",false],
+      job_end_date: ["",false],
+      description: ["",false]
+    }
+    const newField = [...experienceAndEducation.experience,newExperienceField];
+  
+    console.log(newField)
+    setExperienceAndEducation({...experienceAndEducation,experience:[...newField]})
+    console.log(experienceAndEducation)
+  }
+
+
   const getFromLC = async() => {
     const data = await  JSON.parse(localStorage.getItem("generalP"));
     if(data){
@@ -47,7 +68,8 @@ const AppProvider = ({ children }) => {
   },[])
   return (
     <AppContext.Provider
-      value={{generalInfo,setGeneralInfo,getFromLC,experienceAndEducation,setExperienceAndEducation}}
+      value={{generalInfo,setGeneralInfo,getFromLC,experienceAndEducation,
+        setExperienceAndEducation,addExperience}}
     >
       {children}
     </AppContext.Provider>
