@@ -1,6 +1,7 @@
 import { useGlobalContext } from '@/context';
 import React, { useEffect } from 'react';
 import TitleHero from '../ValidationForms/TitleHero';
+import ExperiencePContent from './ExperiencePContent';
 import styles from './InfoSide.module.css'
 
 function ExperienceP() {
@@ -15,22 +16,16 @@ function ExperienceP() {
         </TitleHero>
         <div className={styles.experienceInfo_wrapper}>
         {experienceAndEducation?.experience.map((el,i) => {
-            const { position,employer,job_start_date,job_end_date,description} = el;
             return (
-                <div key={i}>
-                    <div className={styles.position_employer_wrapper}>
-                        <span>{position[0]}</span>
-                        <span>{employer[0]}</span>
-                    </div>
-                    <div className={styles.job_info_wrapper}>
-                        <span>{job_start_date[0]}</span>
-                        <span>{job_end_date[0]}</span>
-                    </div>
-                    <div>
-                        <p>{description[0]}</p>
-                    </div>
-                </div>
+                <ExperiencePContent key={i} content={el} contentType={"experience"}/>
             )
+        })}
+         <TitleHero>
+            განათლება
+        </TitleHero>
+        {experienceAndEducation?.education.map((el,i) => {
+            
+            return <ExperiencePContent key={i} content={el} contentType={"education"}/>
         })}
 </div>
     </section>

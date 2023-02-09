@@ -62,32 +62,36 @@ const [experienceFormCount,setExperienceFormCount] = useState(1);
       const educationField = { 
         id: 0,
         school: ["",false],
-        degree: [data,false],
+        degree: ["",false,data],
         school_end_date: ["",false],
         ed_desc: ["",false]
       }
       
-      setExperienceAndEducation({...experienceAndEducation,education:[educationField]})
+      setExperienceAndEducation({...experienceAndEducation,education:[educationField]});
     }
-    
-
 
   }
 
-  const getFromLC = async() => {
-    const generalPData = await  JSON.parse(localStorage.getItem("generalP"));
-    const experiencePData = await  JSON.parse(localStorage.getItem("experienceP"));
-    if(generalPData){
+  const getFromLC = async(generalInfo) => {
+    if(generalInfo){
+      const generalPData = await  JSON.parse(localStorage.getItem("generalP"));
       setGeneralInfo(generalPData);
+    }else{
+      const experiencePData = await  JSON.parse(localStorage.getItem("experienceP"));
+      if(experiencePData){
+        setExperienceAndEducation(experiencePData);
+      }else{
+        getDegreesData();
+      }
     }
-    if(experiencePData){
-      setExperienceAndEducation(experiencePData);
-    }
+      
+    
   }
   
   useEffect(()=> {
-    getDegreesData();
-    getFromLC()
+    getFromLC(true)
+    getFromLC(false)
+
   },[])
   return (
     <AppContext.Provider

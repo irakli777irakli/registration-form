@@ -60,7 +60,7 @@ function ExperienceForm({currentPageName}) {
     <form className={styles.all_fields_wrapper} onSubmit={handleSubmit}>
       {experienceAndEducation && experienceAndEducation[`${currentPageName}`]?.map((el) => {
         const {id} = el;
-        console.log(el);
+        // console.log(el);
         return(
           <div key={id} className={styles.all_fields_wrapper}>
           <div>
@@ -74,37 +74,42 @@ function ExperienceForm({currentPageName}) {
                 />
           </div>
 
-          <div>
-          <Hero>{currentPageName === "experience" ? "დამსაქმებელი" : "ხარისხი"}</Hero>
+          { currentPageName === "experience" && <div>
+          <Hero>{"დამსაქმებელი"}</Hero>
               <Exp_Edu_Reusable 
-              whichPage={currentPageName === "experience" ? "experience" : "education"}
+              whichPage={"experience"}
               currentFieldId={id}
-              specStyle={currentPageName === "experience" ? "full_input" : "half_input"}
+              specStyle={"full_input"}
                fieldType={"text"}
-               isSelect = {currentPageName === "experience" ? false : true}
-              inputName={currentPageName === "experience" ?"employer" : "degree"}
-               inputPlaceholder={currentPageName === "experience" ?"დამსაქმებელი": "აირჩიეთ ხარისხი"}
+               
+              inputName={"employer" }
+               inputPlaceholder={"დამსაქმებელი"}
                />
-          </div>
+          </div>}
   
           <div className={styles.name_surname_wrapper}>
+
           <div className={styles.name_wrapper}>
-            <Hero>{currentPageName === "experience" ? "დაწყების რიცხვი" : "დამთავრების რიცხვი"}</Hero>
+            <Hero>{currentPageName === "experience" ? "დაწყების რიცხვი" : "ხარისხი"}</Hero>
             <Exp_Edu_Reusable 
            whichPage={currentPageName === "experience" ? "experience" : "education"}
            currentFieldId={id}
             specStyle={"half_input"} fieldType={"date"}
-             inputName={currentPageName === "experience" ?"job_start_date" :"school_end_date"} 
+            isSelect = {currentPageName === "experience" ? false : true}
+             inputName={currentPageName === "experience" ?"job_start_date" : "degree"} 
+             inputPlaceholder={currentPageName === "experience" ? "mm / dd / yyy": "აირჩიეთ ხარისხი"}/>
+          </div>
+
+           <div className={styles.surname_wrapper}>
+            <Hero>{currentPageName === "experience" ? "დამთავრების რიცხვი" : "დამთავრების რიცხვი"}</Hero>
+            <Exp_Edu_Reusable
+           whichPage={currentPageName === "experience" ? "experience" : "education"}
+           currentFieldId={id}
+           specStyle={"half_input"} fieldType={"date"}
+            inputName={currentPageName === "experience" ? "job_end_date" : "school_end_date"}
              inputPlaceholder={"mm / dd / yyy"}/>
           </div>
-          {currentPageName === "experience" && <div className={styles.surname_wrapper}>
-            <Hero>დამთავრების რიცხვი</Hero>
-            <Exp_Edu_Reusable
-           whichPage={"experience"}
-           currentFieldId={id}
-           specStyle={"half_input"} fieldType={"date"} inputName={"job_end_date"} inputPlaceholder={"mm / dd / yyy"}/>
-          </div>
-          }
+          
         </div>
 
         <div className={styles.textarea_wrapper}>

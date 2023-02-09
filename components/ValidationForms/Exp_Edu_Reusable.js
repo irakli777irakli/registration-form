@@ -50,6 +50,11 @@ function Exp_Edu_Reusable({isSelect,currentFieldId,whichPage,fieldType,inputName
 
 
           }
+          if(inputName === "degree" && el[inputName][0] === " "){
+            newVall = el[inputName][1] = false;
+          }else if(inputName === "degree" && el[inputName][0]?.length > 0){
+            newVall = el[inputName][1] = true;
+          }
 
           if(valueLength?.length >= 2){
              newVall = el[inputName][1] = true;
@@ -66,7 +71,7 @@ function Exp_Edu_Reusable({isSelect,currentFieldId,whichPage,fieldType,inputName
       
   }
 
-    function getInputValue(val){
+    function getInputValue(val,index){
         
           const item = experienceAndEducation[`${whichPage}`]?.find((el) => el.id === currentFieldId);
           
@@ -74,11 +79,14 @@ function Exp_Edu_Reusable({isSelect,currentFieldId,whichPage,fieldType,inputName
             return item[inputName][1];
 
           }
+          if(index){
+            return item[inputName][index]
+          }
+         
             return item[inputName][0];
     }
     
   
-
 
   return (
     <>
@@ -93,13 +101,23 @@ function Exp_Edu_Reusable({isSelect,currentFieldId,whichPage,fieldType,inputName
      </div>
     :
     <div style={{position:"relative",width:"100%"}}>
+  {isSelect ? <select value={getInputValue()}  onChange={(e) => displayFielsText(e)} >
+      {getInputValue(false,2)?.map((el,i) => {
+        const {title,id} = el;
+        return i === 0 ?  <option disabled key={i} value="">ხარისხი</option> :
+           <option key={id} value={title}>{title}</option>
+        
+      }
+      )}
+
+
+  </select> 
+  : 
   <input className={styles[specStyle]}  type={`${fieldType}`}
      value={getInputValue()} placeholder={inputPlaceholder}
-      onChange={(e) => displayFielsText(e)} />
-   {/* implement select option stuff conditionally */}
-
-    
-    
+      onChange={(e) => displayFielsText(e)} />}
+   
+   
     {getInputValue(true) ? <span className={styles.success}>✓</span> 
       :
       <span className={styles.error}>!</span>}
