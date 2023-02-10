@@ -9,6 +9,11 @@
     gap: 1rem;
     flex-wrap: wrap;
 }
+.isResume {
+    border: 0.8px solid #000000;
+    background: #FFFFFF;
+    padding: 2rem;
+}
 .generalInfoP_l{
     flex:1;
     display: flex;

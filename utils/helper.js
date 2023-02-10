@@ -54,7 +54,7 @@ export function phoneNumberChecker(value){
     postNumCheck = true;
         }
         if(preNumCheck && postNumCheck && arrWithoutDashes.length === 13){
-            console.log("executed")
+            //console.log("executed")
             let finalOutput = arrWithoutDashes.join("");
             
             
@@ -70,7 +70,7 @@ export function phoneNumberChecker(value){
     }
 
 
-const possibleRoutes = ["/generalNews/1","/experience/2","/education/3","/result/4"];
+const possibleRoutes = ["/generalNews/1","/experience/2","/education/3","/result"];
 export function urlNavigator(index){
     return possibleRoutes[index];
 }

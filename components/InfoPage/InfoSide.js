@@ -4,11 +4,11 @@ import styles from './InfoSide.module.css'
 
 
 
-function InfoSide() {
+function InfoSide({isResume}) {
 
 
   return (
-   <section className={styles.infoSide_wrapper}>
+   <section className={isResume ? `${styles.infoSide_wrapper} ${styles.isResume}` : styles.infoSide_wrapper}>
     <GeneralInfoP />
     <ExperienceP />
    </section>

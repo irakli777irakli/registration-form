@@ -37,13 +37,16 @@ function ReusebleForm({fieldType,inputName,inputPlaceholder,specStyle, onlyTextA
   else if(iName === "photo"){
     const fr = new FileReader();
     // you are reading value from state
+    console.log(value)
     fr.readAsDataURL(value);
 
     fr.addEventListener("load",() => {
       // assigning freader value to state and refferencing it to `newVal`
       // saving only happens inside `this` eventListener
       try{
+        
       const newVal =  generalInfo[iName][0] =  fr.result;
+      // console.log(newVal)
       setGeneralInfo({...generalInfo,newVal});
       localStorage.setItem("generalP",JSON.stringify(generalInfo));
       }
