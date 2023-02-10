@@ -8,12 +8,12 @@ function ReusebleForm({fieldType,inputName,inputPlaceholder,specStyle, onlyTextA
 
   const {generalInfo,setGeneralInfo,getFromLC,exprerience,setExperience} = useGlobalContext();
 
-  function errorSuccess(validState) {
+  function errorSuccess(validState,index) {
     if(validState){
-      return generalInfo[inputName][1] = true;
+      return generalInfo[inputName][index] = true;
       
     }else{
-      return generalInfo[inputName][1] = false;
+      return generalInfo[inputName][index] = false;
   
     }
   }
@@ -24,15 +24,20 @@ function ReusebleForm({fieldType,inputName,inputPlaceholder,specStyle, onlyTextA
   :  e.target.value;
   // use arra ot store, input value and it's state `error or success`.
   // implement email and number s tmr
-  let state;
-  let isGeo;
+  let state,isGeo,isOveralValueEmpty;
+
+ 
+  isOveralValueEmpty = (value?.length > 0 || iName === "photo" )? errorSuccess(true,2) : errorSuccess(false,2); 
+  
+
+
   if(iName === "name"){
     isGeo = georgianCheck(value);
-    state = errorSuccess(isGeo)
+    state = errorSuccess(isGeo,1)
   }
   else if(iName === "surname"){
     isGeo = georgianCheck(value);
-    state = errorSuccess(isGeo)
+    state = errorSuccess(isGeo,1)
   }
   else if(iName === "photo"){
     const fr = new FileReader();
@@ -59,9 +64,9 @@ function ReusebleForm({fieldType,inputName,inputPlaceholder,specStyle, onlyTextA
    
     if(value){
       
-      errorSuccess(true);
+      errorSuccess(true,1);
     }else{
-      errorSuccess(false);
+      errorSuccess(false,1);
     }
     return;
     }
@@ -69,20 +74,20 @@ function ReusebleForm({fieldType,inputName,inputPlaceholder,specStyle, onlyTextA
     const isCorrectEmail = value.includes("@redberry.ge");
     const isEmpty = value.split('').every((el)=> el !== " ");
     if(isEmpty && isCorrectEmail){
-      state = errorSuccess(isCorrectEmail);
+      state = errorSuccess(isCorrectEmail,1);
     }else{
-      state = errorSuccess(false);
+      state = errorSuccess(false,1);
     }
     
   }
   else if(iName === "phoneNumber"){
    const {isValidNumber,finalOutput} = phoneNumberChecker(value);
-    state = errorSuccess(isValidNumber);
+    state = errorSuccess(isValidNumber,1);
     if(finalOutput){
       value = generalInfo[iName][0] = finalOutput;
     }
   }
-  
+  setGeneralInfo({...generalInfo,isOveralValueEmpty})
   setGeneralInfo({...generalInfo,state});
   setGeneralInfo({...generalInfo,value});
   localStorage.setItem("generalP",JSON.stringify(generalInfo))
@@ -101,16 +106,24 @@ function ReusebleForm({fieldType,inputName,inputPlaceholder,specStyle, onlyTextA
    placeholder={inputPlaceholder} value={generalInfo[inputName][0]} name={inputName} onChange={(e) => displayInfo(e,inputName)} />
     :
   
-    <div style={{position:"relative",widows:"100%"}}>
-    <input className={styles[specStyle]}
-    accept={acceptance}
-      type={`${fieldType}`}
-        placeholder={inputPlaceholder}
-         value={fieldType === "file" ? "" : generalInfo[inputName][0]} 
-         name={inputName} onChange={(e) => displayInfo(e,inputName)} />
-      {generalInfo[inputName][1] ? <span className={styles.success}>✓</span> 
+    <div style={{position:"relative",width:"100%"}}>
+      <input 
+      className={`${styles[specStyle]} 
+      ${generalInfo[inputName][2] ? generalInfo[inputName][1] ? `${styles.border_success}` : `${styles.border_error}` : null}`}
+      accept={acceptance}
+          type={`${fieldType}`}
+          placeholder={inputPlaceholder}
+          value={fieldType === "file" ? "" : generalInfo[inputName][0]}
+          id={fieldType === "file" ? "file" : null} 
+          name={inputName} onChange={(e) => displayInfo(e,inputName)} />
+      {fieldType === "file" && 
+      <label htmlFor="file" className={styles.file_label}>ატვირთვა</label>}
+      {generalInfo[inputName][2] ? (generalInfo[inputName][1] ?
+       <span className={specStyle === "full_input" ? `${styles.success} ${styles.success_left}`  : styles.success}>✓</span> 
       :
-      <span className={styles.error}>!</span>}
+      <span className={styles.error}>!</span>)
+      : null
+      }
       
       
     </div>

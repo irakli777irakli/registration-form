@@ -1,19 +1,42 @@
-/* hero */
-.company_name{
-    color: rgb(245, 53, 53);
-    font-family: "HelveticaNeue", sans-serif;
-    font-size: 1.5rem;
+/* Titlehero */
+.company_name,.textAreaTitle{
+    color: #F93B1D;
+    font-family: "Helvetica Neue", sans-serif;
+    font-style: normal;
+    font-size: 2.125rem;
+    font-weight: 700;
+    line-height: 41.51px;
   }
   .genericPageNames {
-    color: black;
-    font-family: "HelveticaNeue", sans-serif;
+    color: #1A1A1A;
+    font-family: 'Helvetica Neue',sans-serif;
+    font-weight: 700;
+    line-height: 29px;
     font-size: 1.5rem;
   }
+  .textAreaTitle{
+    font-size: 1.125rem;
+  }
 
-
+/* Hero */
+.input_label{
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 1rem;
+  line-height: 21px;
+  font-weight: 500;
+}
+.two_letter{
+  font-family: 'Helvetica Neue';
+font-style: normal;
+font-weight: 300;
+font-size: 14px;
+line-height: 21px;
+color: #2E2E2E;
+}
 
   /* GeneralInfoForms */
   .all_fields_wrapper{
+    margin-top: 1.5em;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -35,6 +58,28 @@
   .file_upload_wrapper{
     display: flex;
     gap: 1rem;
+    position: relative;
+  }
+  .upload_button{
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+    position: absolute; 
+  }
+  .file_label{
+  display: block;
+  position: relative;
+  width: 107px;
+  height: 27px;
+  border-radius: 4px;
+  background: #0E80BF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: "Helvetica Neue", sans-serif;
+  cursor: pointer;
+
   }
   .email_number_wrapper{
     display: flex;
@@ -43,18 +88,21 @@
 
   /* ReussableForm styling */
   
-  .success{
+  .success,.success_left{
     position: absolute;
     width: 20px;
     height: 20px;
     border-radius: 50%;
     background-color: #98E37E;
     color: white;
-    right: 5%;
+    right: 7%;
     top: 20%;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  .success_left{
+    right: 2%;
   }
   .error{
     position: absolute;
@@ -67,31 +115,40 @@
     align-items: center;
     justify-content: center;
     top: 20%;
-    right: -4%;
+    right: -3.6%;
   }
+  .border_success{
+    border: 1px solid #98E37E !important;
+  }
+  .border_error{
+    border: 1px solid #EF5050 !important;
+  }
+
+
+
+  .baseInput,.half_input,.full_textarea,.full_input{
+    border-radius: 4px;
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    padding: 0.5rem 0.7rem;
+    border:1px solid #BCBCBC;
+  }
+
   .half_input{
     width: 95%;
-    padding: 0.5rem 0.7rem;
-    font-family: "HelveticaNeue", sans-serif;
-    font-size: 1rem;
- 
+    height: 48px;
+    
 }
-  .upload_button{
-   background-color: rgb(73, 73, 245);
-   color: white;
-   border: none;
-  
-   
-  }
   .full_textarea{
     width: 100%;
     resize: none;
-  
   }
   .full_input{
     width: 100%;
-    padding: 0.5rem 0.7rem;
-   
+  
   }
 
 

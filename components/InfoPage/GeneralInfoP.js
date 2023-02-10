@@ -20,12 +20,12 @@ function GeneralInfoP() {
             {generalInfo?.name[0]} {generalInfo?.surname[0]}
             </TitleHero>
         <div className={styles.number_email_wrapper}>
-            <span>{generalInfo?.email[0]}</span>
-            <span>{generalInfo?.phoneNumber[0]}</span>
+            <span className={styles.email}>@ {generalInfo?.email[0]}</span>
+            <span className={styles.phone_Number}>📞 {generalInfo?.phoneNumber[0]}</span>
         </div>
         <div className={styles.title_textarea}>
-        {generalInfo?.aboutMe[0]?.length > 0 && <TitleHero color={"red"}>ჩემს შესახებ</TitleHero>}
-        <span>{generalInfo?.aboutMe[0]}</span>
+        {generalInfo?.aboutMe[0]?.length > 0 && <TitleHero textAreaTitle={true} color={"red"}>ჩემს შესახებ</TitleHero>}
+        <span className={styles.aboutMe_text}>{generalInfo?.aboutMe[0]}</span>
         </div>
     </div>
     <div className={styles.generalInfoP_r}>

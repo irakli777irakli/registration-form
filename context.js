@@ -13,12 +13,12 @@ const AppProvider = ({ children }) => {
 
 
   const [generalInfo,setGeneralInfo] = useState({
-    name: ["",false],
-    surname: ["",false],
-    photo: ["",false],
+    name: ["",false,false],
+    surname: ["",false,false],
+    photo: ["",false,false],
     aboutMe: [""],
-    email: ["",false],
-    phoneNumber: ["",false],
+    email: ["",false,false],
+    phoneNumber: ["",false,false],
    
   });
  
@@ -164,12 +164,52 @@ const [resume,setResume] = useState();
     
     getFromLC();
   
-  },[])
+  },[]);
+
+
+  const goZadni = () => {
+    setGeneralInfo({
+      name: ["",false,false],
+    surname: ["",false,false],
+    photo: ["",false,false],
+    aboutMe: [""],
+    email: ["",false,false],
+    phoneNumber: ["",false,false],
+    });
+    setExperienceAndEducation({
+      experience:[{
+        id: 0,
+        position: ["",false],
+        employer: ["",false],
+        job_start_date: ["",false],
+        job_end_date: ["",false],
+        description: ["",false]
+      }],
+      education: [{ 
+        id: 0,
+        school: ["",false],
+        degree: ["",false],
+        school_end_date: ["",false],
+        ed_desc: ["",false]
+      }]
+  });
+  if(localStorage.getItem("generalP") || localStorage.getItem("experienceP")){
+    localStorage.removeItem("generalP");
+    localStorage.removeItem("experienceP");
+  }
+  }
+
+
+
+
+
+
+
   return (
     <AppContext.Provider
       value={{generalInfo,setGeneralInfo,getFromLC,experienceAndEducation,
         setExperienceAndEducation,addMore,getSendingData,resume,setResume,
-        successPopUp,setSuccessPopUp
+        successPopUp,setSuccessPopUp,goZadni
       }}
     >
       {children}

@@ -1,10 +1,10 @@
 .go_back_btn_wrapper{
-    width: 10%;
+    width: 5%;
     opacity: 1;
     display: flex;
     align-items: start;
     justify-content: center;
   }
   .hidden{
-    opacity: 0;
+    display: none;
   }

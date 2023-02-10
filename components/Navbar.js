@@ -5,6 +5,7 @@ import GeneralInfoForm from "./ValidationForms/GeneralInfoForm";
 
 import TitleHero from "./ValidationForms/TitleHero";
 import ZadniBtn from "./ZadniBtn/ZadniBtn";
+import Image from "next/image";
 
 
 
@@ -20,7 +21,7 @@ function Navbar({currentPage = [], title, }) {
                 {title}
                 </TitleHero >
             {/* <h1 className={Number(numeric) ? styles.genericPageNames : styles.company_name}></h1> */}
-            <p>{numeric}/3</p>
+            <p className={styles.pageNumber}>{numeric}/3</p>
             </div>
         )
     }
@@ -28,16 +29,13 @@ function Navbar({currentPage = [], title, }) {
   return (
 
     <nav className={styles.registration_nav}>
-        {/* in order to maintain 10% and 40 % ration between `backBtn` and `mainNan`*/}
+        {/* when First page displa full, otherwise ass Zadni btn*/}
        {Number(numeric) > 0 ?  <ZadniBtn /> :  <ZadniBtn hidden={true}/> }
        {/* will update this logic in more concise way. */}
        <div className={Number(numeric) > 0 ? styles.title_hr_wrapper : styles.title_hr_wrapper_home}>
              {Number(numeric) ?  displayPageIndexer()
             : 
-            <TitleHero  color={"red"}>
-                {title}
-            </TitleHero>   
-            //<h1 className={Number(numeric) ? styles.genericPageNames : styles.company_name}>{title}</h1>
+                <Image src={"/redberryImg.png"} width={236} height={38} alt="redberry" />
 
         }
             <hr className={styles.nav_hr}/>

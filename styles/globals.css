@@ -1,5 +1,5 @@
 @font-face {
-  font-family: "HelveticaNeue";
+  font-family: "Helvetica Neue";
   src: url(../public/HelveticaNeue.ttc);
 }
 
@@ -9,7 +9,8 @@
   padding: 0;
   box-sizing: border-box;
   /* outline: 1px solid red; */
-  font-family: "HelveticaNeue", sans-serif;
+  font-family: "Helvetica Neue", sans-serif;
+  
  
 }
 
@@ -25,14 +26,67 @@
 }
  .logo{
   position: absolute;
-  right: 33%;
+  right: 25%;
   top: -10%;
  
+}
+
+.add_resume_btn{
+  width: 464px;
+  height: 60px;
+  border-radius: 8px;
+  background-color: #1A1A1A;
+  color: white;
+  font-size: 1.2rem;
+  z-index: 2;
+  font-family: "Helvetica Neue", sans-serif;
+
+}
+
+.resume{
   display: flex;
   align-items: center;
   justify-content: center;
-  
+  margin-top: 10%;
+ 
 }
+.popUp{
+  position: absolute;
+  width: 17rem;
+  height: 167px;
+  right: 5%;
+  top: 5%;
+ 
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #E4E4E4;
+  box-shadow: 0px 4px 28px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
+.close-popUp{
+  align-self: flex-end;
+  margin-right: 20px;
+  margin-top: 20px;
+  width: 0.9rem;
+  color: black;
+  cursor: pointer;
+}
+.popup-text{
+  margin-left: 20px;
+  margin-top: 10px;
+  font-family: "Helvetica Neue";
+  font-size: 1.2rem;
+  line-height: 43px;
+}
+
+
+
+
+
+
+
+
+
 /* .circle_chars{
   position: relative;
   width: 100%;
@@ -72,58 +126,3 @@
   transform: rotate(-20deg);
 
 }  */
-
-
-.add_resume_btn{
-  width: 250px;
-  height: 40px;
-  border-radius: 5px;
-  background-color: black;
-  color: white;
-  font-size: 1.2rem;
-  z-index: 2;
-  font-family: "HelveticaNeue", sans-serif;
-
-}
-
-.resume{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 10%;
- 
-}
-.popUp{
-  position: absolute;
-  width: 17rem;
-  height: 167px;
-  right: 5%;
-  top: 5%;
- 
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #E4E4E4;
-  box-shadow: 0px 4px 28px rgba(0, 0, 0, 0.25);
-  border-radius: 8px;
-}
-.close-popUp{
-  align-self: flex-end;
-  margin-right: 20px;
-  margin-top: 20px;
-  width: 0.9rem;
-  color: black;
-  cursor: pointer;
-}
-.popup-text{
-  margin-left: 20px;
-  margin-top: 10px;
-  font-family: "HelveticaNeue";
-  font-size: 1.2rem;
-  line-height: 43px;
-}
-
-
-
-
-
-

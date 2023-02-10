@@ -1,8 +1,15 @@
 .sumbit_btn,.prev_btn{
     padding: 0.5rem 0.7rem;
     color: white;
-    background-color: purple;
+    background-color:  #6B40E3;
+    width: 151px;
+    height: 48px;
+    border-radius: 4px;
     align-self: flex-end;
+    border: none;
+    font-family: "Helvetica Neue",serif;
+    line-height: 20px;
+    font-weight: 500;
 }
 .prev_btn{
     align-self: flex-start;
