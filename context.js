@@ -34,17 +34,15 @@ const AppProvider = ({ children }) => {
     }],
     education: [{ 
       id: 0,
-      school: ["",false],
-      degree: ["",false],
-      school_end_date: ["",false],
-      ed_desc: ["",false]
+      school: ["",false,false],
+      degree: ["",false,false],
+      school_end_date: ["",false,false],
+      ed_desc: ["",false,false]
     }]
     
 });
 
-
 const [resume,setResume] = useState();
-
   const addMore = async (what) => {
     let newField;
     if(what === "experience"){
@@ -52,7 +50,7 @@ const [resume,setResume] = useState();
       const newExperienceField = {
         id: formCount.experience,
         position: ["",false,false],
-        employer: ["",false],
+        employer: ["",false,false],
         job_start_date: ["",false,false],
         job_end_date: ["",false,false],
         description: ["",false,false]
@@ -74,14 +72,15 @@ const [resume,setResume] = useState();
 
   async function getDegreesData(forMoreEducation){
     const response = await fetch("https://resume.redberryinternship.ge/api/degrees");
-    const data = await response.json();
+    const data = await response.json()
+    data.unshift({id:0,title:"აირჩიეთ ხარისხი"});
     if(data){
       const educationField = { 
         id: 0,
-        school: ["",false],
-        degree: ["",false,data],
-        school_end_date: ["",false],
-        ed_desc: ["",false]
+        school: ["",false,false],
+        degree: ["",false,false,data],
+        school_end_date: ["",false,false],
+        ed_desc: ["",false,false]
       }
       if(forMoreEducation){
         return educationField;
@@ -109,18 +108,11 @@ const [resume,setResume] = useState();
       
     
   }
-
-
-  const getSendingData = async () => {
-  //strip off the data uri prefix
- 
   
-    const response = await fetch(`${generalInfo.photo[0]}`);
-    const blob = await response.blob();
-    console.log(blob)
-    const file = new File([blob],'image.jpg',{type: blob.type});
-    // continue from here
-    console.log(file)
+
+  const getSendingData = () => {
+    const imageFile = urlToFile(generalInfo.photo[0]);
+
     const name = generalInfo.name[0];
     const surname = generalInfo.surname[0];
     const email = generalInfo.email[0];
@@ -137,7 +129,7 @@ const [resume,setResume] = useState();
     });
     const educations = experienceAndEducation.education.map((el) => {
       const {degree,ed_desc,school,school_end_date} = el;
-      const {id,title} =  degree[2].find((el) => el.title === degree[0]);
+      const {id,title} =  degree[3].find((el) => el.title === degree[0]);
       console.log(id);
       return{
         institute:school[0],
@@ -147,17 +139,35 @@ const [resume,setResume] = useState();
       }
     });
   
+    let payLoad = new FormData();
+    payLoad.append('name',name);
+    payLoad.append('surname',surname);
+    payLoad.append('email',email);
+    payLoad.append('phone_number',phone_number);
+    payLoad.append('experiences',experiences);
+    payLoad.append('educations',educations);
+
+    payLoad.append('image', imageFile);
+    payLoad.append('about_me',about_me);
+    return payLoad;
+     
+  }
+
+  const urlToFile = (url) =>{
+    let arr = url.split(",");
+    let mime = arr[0].match(/:(.*?);/)[1];
+    let data = arr[1];
     
-    return {
-      name,
-      surname,
-      email,
-      phone_number,
-      experiences,
-      educations,
-      image:file,
-      about_me
+    let dataStr = atob(data);
+    let n = dataStr.length;
+    let dataArr = new Uint8Array(n);
+    
+    while(n--){
+      dataArr[n] = dataStr.charCodeAt(n);
     }
+    let file = new File([dataArr],"File.jpg",{type:mime});
+    return file
+  
   }
   
   useEffect(()=> {
@@ -179,18 +189,18 @@ const [resume,setResume] = useState();
     setExperienceAndEducation({
       experience:[{
         id: 0,
-        position: ["",false],
-        employer: ["",false],
-        job_start_date: ["",false],
-        job_end_date: ["",false],
-        description: ["",false]
+        position: ["",false,false],
+        employer: ["",false,false],
+        job_start_date: ["",false,false],
+        job_end_date: ["",false,false],
+        description: ["",false,false]
       }],
       education: [{ 
         id: 0,
-        school: ["",false],
-        degree: ["",false],
-        school_end_date: ["",false],
-        ed_desc: ["",false]
+        school: ["",false,false],
+        degree: ["",false,false],
+        school_end_date: ["",false,false],
+        ed_desc: ["",false,false]
       }]
   });
   if(localStorage.getItem("generalP") || localStorage.getItem("experienceP")){
@@ -208,8 +218,8 @@ const [resume,setResume] = useState();
   return (
     <AppContext.Provider
       value={{generalInfo,setGeneralInfo,getFromLC,experienceAndEducation,
-        setExperienceAndEducation,addMore,getSendingData,resume,setResume,
-        successPopUp,setSuccessPopUp,goZadni,pageNumber,setPageNumber
+        setExperienceAndEducation,addMore,getSendingData,
+        successPopUp,setSuccessPopUp,goZadni,pageNumber,setPageNumber,resume,setResume
       }}
     >
       {children}

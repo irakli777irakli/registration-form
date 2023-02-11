@@ -150,5 +150,10 @@ color: #2E2E2E;
     width: 100%;
   
   }
-
+.prev_next_btn_wrapper{
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
 

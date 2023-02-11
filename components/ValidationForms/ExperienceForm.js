@@ -15,68 +15,89 @@ function ExperienceForm({currentPageName}) {
   useEffect(() => {},[experienceAndEducation?.experience?.length
      || experienceAndEducation?.education?.length])
 
+    function ch(el,fieldName,length1){
+      if(fieldName === "exp"){
+        const {position,employer,job_start_date,job_end_date,description} = el;
+        if(length1){
+          return [position[1],employer[1],job_start_date[1],job_end_date[1],description[1]];
+        }else{
+          return [position[2],employer[2],job_start_date[2],job_end_date[2],description[2]];
+        }
+      }
+      else{
+        const {school,degree,school_end_date,ed_desc} = el;
+        if(length1){
+          return [school[1],degree[1],school_end_date[1],ed_desc[1]];
+        }else{
+          return [school[2],degree[2],school_end_date[2],ed_desc[2]];
+        }
+      }
+     
+    }
+
+    
+    function checkValidFields(expOrEdu,fieldName,singleOrMultiple){
+      const fieldbool =  experienceAndEducation[`${expOrEdu}`]?.map((el)=> {
+        return ch(el,fieldName,singleOrMultiple);
+      });
+      return fieldbool;
+    }
+
+    async function finish(pt){
+
+      const dataForSending =  getSendingData();
+      
+      console.log(dataForSending);
+       const respose = await fetch("https://resume.redberryinternship.ge/api/cvs",{
+            method:"POST",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataForSending)
+          });
+          const data = await respose.json();
+          console.log(data);
+
+        
+    }
 
   async function handleSubmit(e){
     e.preventDefault();
     let path;
     if(currentPageName === "experience"){
-      path = urlNavigator(2);
-      if(experienceAndEducation?.experience[0].position[1] &&
-        experienceAndEducation?.experience[0].employer[1] &&
-        experienceAndEducation?.experience[0].job_start_date[1] &&
-        experienceAndEducation?.experience[0].job_end_date[1] &&
-        experienceAndEducation?.experience[0].description[1]){
-          if(experienceAndEducation?.experience?.length === 1){
-            router.push(path);
-          }
-  
-  
-         for(let i=0;i<experienceAndEducation?.experience?.length;i++){
-          if(i===0){
-            continue;
-          }else{
-            if((experienceAndEducation?.experience[i].position[1] &&
-              experienceAndEducation?.experience[i].employer[1] &&
-              experienceAndEducation?.experience[i].job_start_date[1] &&
-              experienceAndEducation?.experience[i].job_end_date[1] &&
-              experienceAndEducation?.experience[i].description[1])
-              ||
-              (experienceAndEducation?.experience[i].position[1] === false &&
-                experienceAndEducation?.experience[i].employer[1] === false &&
-                experienceAndEducation?.experience[i].job_start_date[1] === false &&
-                experienceAndEducation?.experience[i].job_end_date[1] === false &&
-                experienceAndEducation?.experience[i].description[1] === false)
-              ){
-                router.push(path);
-              }
-          }
-         }
-        }
-    }else{
       path = urlNavigator(3);
-      if( experienceAndEducation?.education[0].school[1] &&
-        experienceAndEducation?.education[0].degree[1] &&
-        experienceAndEducation?.education[0].school_end_date[1] &&
-        experienceAndEducation?.education[0].ed_desc[1] ){
-          const dataForSending = await getSendingData();
-          console.log(dataForSending)
-          
-        //  const respose = await fetch("https://resume.redberryinternship.ge/api/cvs",{
-        //     method:"POST",
-        //     headers: {
-        //       'Accept': 'application/json',
-        //       'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(dataForSending)
-        //   });
-        //   const data = await respose.json();
-        //   console.log(data);
-
-          setResume(JSON.stringify(dataForSending));
+      if(experienceAndEducation?.experience?.length === 1){
+        
+        const checkSingleField = checkValidFields("experience","exp",true)
+       
+        const areFieldsValid = checkSingleField[0].every((el) => el === true);
+        
+        if(areFieldsValid){
           router.push(path);
-
         }
-     
+      }else{
+       const checkEveryField = checkValidFields("experience","exp",false);
+       if(!checkEveryField.flat().includes(false)){
+        router.push(path);
+       }
+      }
+    }
+    // educational part
+    else{
+      path = urlNavigator(4);
+      if(experienceAndEducation?.education?.length === 1){
+        const checkFirstEduFields = checkValidFields("education","edu",true)
+         const areFieldsValid = checkFirstEduFields[0].every((el) => el === true);
+        if(areFieldsValid){
+          finish(path)
+        }
+      }else{
+        const checkAllEduFields = checkValidFields("education","edu",false);
+        if(!checkAllEduFields.flat().includes(false)){
+          finish(path)
+         }
+      }
     }
     
   }
@@ -162,8 +183,10 @@ function ExperienceForm({currentPageName}) {
       "მეტი განათლების დამატება"}
       which={currentPageName === "experience" ? "exp" : "edu"}
       />
+      <div className={styles.prev_next_btn_wrapper}>
      <NextBtn next={true} text={currentPageName === "education"? "დასრულება" :"შემდეგი"}/>
      <NextBtn next={false} text={"უკან"}/>
+     </div>
     </form>
     </section>
   )

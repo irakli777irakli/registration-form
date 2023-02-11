@@ -86,7 +86,6 @@ function Exp_Edu_Reusable({isSelect,currentFieldId,whichPage,fieldType,inputName
           
           if(val){
             return item[inputName][1];
-
           }
           if(index){
             return item[inputName][index]
@@ -101,7 +100,11 @@ function Exp_Edu_Reusable({isSelect,currentFieldId,whichPage,fieldType,inputName
     <>
     {onlyTextArea ? 
     <div style={{position:"relative",width:"100%"}}>
-    <textarea className={styles[specStyle]} cols={10} rows={10}
+    <textarea
+    
+    
+    className={`${styles[specStyle]} ${getInputValue(false,2) ? (getInputValue(true) ? `${styles.border_success}` : `${styles.border_error}`):null}`} 
+    cols={10} rows={10}
     placeholder={inputPlaceholder} value={getInputValue()}
      name={inputName} onChange={(e) => displayFielsText(e)}/>
     {getInputValue(false,2) ? (getInputValue(true) ? <span className={styles.success}>✓</span> 
@@ -110,23 +113,27 @@ function Exp_Edu_Reusable({isSelect,currentFieldId,whichPage,fieldType,inputName
      </div>
     :
     <div style={{position:"relative",width:"100%"}}>
-  {isSelect ? <select value={getInputValue()}  onChange={(e) => displayFielsText(e)} >
-      {getInputValue(false,2)?.map((el,i) => {
+  {isSelect ? <select
+  className={`${styles[specStyle]} ${getInputValue(false,2) ? (getInputValue(true) ? `${styles.border_success}` : `${styles.border_error}`):null} `}  
+  type={`${fieldType}`}
+  value={getInputValue()}  onChange={(e) => displayFielsText(e)} >
+      {getInputValue(false,3)?.map((el,i) => {
         const {title,id} = el;
-        return i === 0 ?  <option disabled key={i} value="">ხარისხი</option> :
-           <option key={id} value={title}>{title}</option>
         
+        return id === 0 ?  <option disabled key={i} value="">{title}</option> :
+           <option 
+           key={id} value={title}>{title}</option> 
       }
       )}
-
-
   </select> 
   : 
-  <input className={styles[specStyle]}  type={`${fieldType}`}
+  <input 
+  className={`${styles[specStyle]} ${getInputValue(false,2) ? (getInputValue(true) ? `${styles.border_success}` : `${styles.border_error}`):null} `}  
+  type={`${fieldType}`}
      value={getInputValue()} placeholder={inputPlaceholder}
       onChange={(e) => displayFielsText(e)} />}
   
-    {getInputValue(false,2) ? (getInputValue(true) ? <span className={styles.success}>✓</span> 
+    {getInputValue(false,2) ? (getInputValue(true) ? <span className={specStyle === "full_input" ? `${styles.success} ${styles.success_left}`  : styles.success}>✓</span> 
       :
       <span className={styles.error}>!</span>) : null}
     </div>
@@ -136,3 +143,4 @@ function Exp_Edu_Reusable({isSelect,currentFieldId,whichPage,fieldType,inputName
 }
 
 export default Exp_Edu_Reusable
+

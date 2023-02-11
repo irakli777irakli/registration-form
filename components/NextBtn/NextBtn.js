@@ -16,7 +16,7 @@ function NextBtn({next,text}) {
   return (
     <button type={next ? "submit" : "button"}
      className={next ? styles.sumbit_btn : styles.prev_btn}
-     onClick={() => {!false && goToPevPage()}}
+     onClick={() => {!next && goToPevPage()}}
      >
         {text}
     </button>

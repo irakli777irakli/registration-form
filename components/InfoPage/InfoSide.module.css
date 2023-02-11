@@ -37,7 +37,7 @@
     flex-direction: column;
     flex-wrap: wrap;
 }
-.email,.phone_Number{
+.email,.phone_Number,.position_employer_wrapper>span,.textAreaContent{
     font-family: 'Helvetica Neue';
     font-style: normal;
     color: #1A1A1A;
@@ -74,13 +74,20 @@
 }
 
 /* experinceP */
-.experienceP{
-    flex:1;
+.experienceP,.ExperiencePContent_wrapper{
+  
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     gap: 1rem;
 }
+.experienceP{
+    flex:1;
+}
+.position_employer_wrapper>span,.textAreaContent{
+    text-transform: capitalize;
+}
+
 .experienceInfo_wrapper,.job_info_wrapper{
     display: flex;
     flex-direction: column;
@@ -90,6 +97,8 @@
 .job_info_wrapper{
     color: gray;
     flex-direction: row;
+    text-align: center;
+    justify-content: flex-start;
 }
 .position_employer_wrapper{
     display: flex;
