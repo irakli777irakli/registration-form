@@ -70,7 +70,7 @@ export function phoneNumberChecker(value){
     }
 
 
-const possibleRoutes = ["/generalNews/1","/experience/2","/education/3","/result"];
+const possibleRoutes = ["/","/generalNews/1","/experience/2","/education/3","/result"];
 export function urlNavigator(index){
     return possibleRoutes[index];
 }

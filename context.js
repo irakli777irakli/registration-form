@@ -10,7 +10,7 @@ const AppProvider = ({ children }) => {
   });
 
   const [successPopUp,setSuccessPopUp] = useState(true);
-
+  const [pageNumber,setPageNumber] = useState(0);
 
   const [generalInfo,setGeneralInfo] = useState({
     name: ["",false,false],
@@ -26,11 +26,11 @@ const AppProvider = ({ children }) => {
   const [experienceAndEducation,setExperienceAndEducation] = useState({
     experience:[{
       id: 0,
-      position: ["",false],
-      employer: ["",false],
-      job_start_date: ["",false],
-      job_end_date: ["",false],
-      description: ["",false]
+      position: ["",false,false],
+      employer: ["",false,false],
+      job_start_date: ["",false,false],
+      job_end_date: ["",false,false],
+      description: ["",false,false]
     }],
     education: [{ 
       id: 0,
@@ -51,11 +51,11 @@ const [resume,setResume] = useState();
       setFormCount({...formCount,experience:formCount.experience + 1});
       const newExperienceField = {
         id: formCount.experience,
-        position: ["",false],
+        position: ["",false,false],
         employer: ["",false],
-        job_start_date: ["",false],
-        job_end_date: ["",false],
-        description: ["",false]
+        job_start_date: ["",false,false],
+        job_end_date: ["",false,false],
+        description: ["",false,false]
       }
       newField = [...experienceAndEducation.experience,newExperienceField];
       setExperienceAndEducation({...experienceAndEducation,experience:[...newField]})
@@ -209,7 +209,7 @@ const [resume,setResume] = useState();
     <AppContext.Provider
       value={{generalInfo,setGeneralInfo,getFromLC,experienceAndEducation,
         setExperienceAndEducation,addMore,getSendingData,resume,setResume,
-        successPopUp,setSuccessPopUp,goZadni
+        successPopUp,setSuccessPopUp,goZadni,pageNumber,setPageNumber
       }}
     >
       {children}

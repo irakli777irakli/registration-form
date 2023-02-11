@@ -6,6 +6,7 @@ import GeneralInfoForm from "./ValidationForms/GeneralInfoForm";
 import TitleHero from "./ValidationForms/TitleHero";
 import ZadniBtn from "./ZadniBtn/ZadniBtn";
 import Image from "next/image";
+import { useGlobalContext } from "@/context";
 
 
 
@@ -13,6 +14,9 @@ import Image from "next/image";
 function Navbar({currentPage = [], title, }) {
     
     const [pageName,numeric] = currentPage;
+
+    const {pageNumber,setPageNumber} = useGlobalContext();
+    setPageNumber(Number(numeric));
 
     function displayPageIndexer() {
         return (

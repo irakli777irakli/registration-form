@@ -12,7 +12,7 @@ export default function Home() {
     <PagesMainWrapper isMain = {true}>
      <Navbar/>
      <div className="addBtn_logo_wrapper">
-        <button type='button' className="add_resume_btn" onClick={() =>router.push(urlNavigator(0))}>
+        <button type='button' className="add_resume_btn" onClick={() =>router.push(urlNavigator(1))}>
           რეზიუმეს დამატება
         </button>
         <Image src={"/logo.png"} width={299} height={299} alt="symbol" className='logo'/>

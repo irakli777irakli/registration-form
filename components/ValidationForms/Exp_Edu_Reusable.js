@@ -20,8 +20,17 @@ function Exp_Edu_Reusable({isSelect,currentFieldId,whichPage,fieldType,inputName
       const updatedValue = experienceAndEducation[whichPage].map((el) => {
         if(el.id === currentFieldId){
           let newVall = el[inputName][0] = e.target.value;
+          let isFieldEmpty;
           // let newVallWithotSpaces = newVall
           const valueLength = newVall.split('').filter((ch) => ch !== " ");
+
+          if(valueLength?.length > 0){
+            
+            isFieldEmpty =  el[inputName][2] = true;
+          }else{
+            isFieldEmpty =  el[inputName][2] = false;
+          }
+
 
           if((inputName === "job_start_date" ) || (inputName === "job_end_date")){
             let job_status; 
@@ -62,10 +71,10 @@ function Exp_Edu_Reusable({isSelect,currentFieldId,whichPage,fieldType,inputName
              newVall = el[inputName][1] = false;
 
           }
-          return {...el,newVall}
+          return {...el,newVall,isFieldEmpty}
         }
       });
-      //console.log(updatedValue);
+      // console.log(updatedValue);
       setExperienceAndEducation({...experienceAndEducation,updatedValue});
       localStorage.setItem("experienceP",JSON.stringify(experienceAndEducation))
       
@@ -95,9 +104,9 @@ function Exp_Edu_Reusable({isSelect,currentFieldId,whichPage,fieldType,inputName
     <textarea className={styles[specStyle]} cols={10} rows={10}
     placeholder={inputPlaceholder} value={getInputValue()}
      name={inputName} onChange={(e) => displayFielsText(e)}/>
-    {getInputValue(true) ? <span className={styles.success}>✓</span> 
+    {getInputValue(false,2) ? (getInputValue(true) ? <span className={styles.success}>✓</span> 
       :
-      <span className={styles.error}>!</span>}
+      <span className={styles.error}>!</span>) : null}
      </div>
     :
     <div style={{position:"relative",width:"100%"}}>
@@ -116,11 +125,10 @@ function Exp_Edu_Reusable({isSelect,currentFieldId,whichPage,fieldType,inputName
   <input className={styles[specStyle]}  type={`${fieldType}`}
      value={getInputValue()} placeholder={inputPlaceholder}
       onChange={(e) => displayFielsText(e)} />}
-   
-   
-    {getInputValue(true) ? <span className={styles.success}>✓</span> 
+  
+    {getInputValue(false,2) ? (getInputValue(true) ? <span className={styles.success}>✓</span> 
       :
-      <span className={styles.error}>!</span>}
+      <span className={styles.error}>!</span>) : null}
     </div>
 }
     </>

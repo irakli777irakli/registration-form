@@ -13,15 +13,15 @@ function GeneralInfoP() {
 
 
   return (
-    <>
+    <div className={styles.generalInfoP_hr_wrapper}>
     <div className={styles.generalInfoP_wrapper}>
         <div className={styles.generalInfoP_l}>
             <TitleHero color={"red"}>
             {generalInfo?.name[0]} {generalInfo?.surname[0]}
             </TitleHero>
         <div className={styles.number_email_wrapper}>
-            <span className={styles.email}>@ {generalInfo?.email[0]}</span>
-            <span className={styles.phone_Number}>📞 {generalInfo?.phoneNumber[0]}</span>
+            {generalInfo?.email[2] && <span className={styles.email}>@ {generalInfo?.email[0]}</span>}
+            {generalInfo?.phoneNumber[2] && <span className={styles.phone_Number}>📞 {generalInfo?.phoneNumber[0]}</span>}
         </div>
         <div className={styles.title_textarea}>
         {generalInfo?.aboutMe[0]?.length > 0 && <TitleHero textAreaTitle={true} color={"red"}>ჩემს შესახებ</TitleHero>}
@@ -34,8 +34,9 @@ function GeneralInfoP() {
   
     </div>
   </div>
-  <hr />
- </>
+  {(generalInfo?.name[2] && generalInfo?.email[2]
+   && generalInfo?.phoneNumber[2] && generalInfo?.photo[2]) && <hr className={styles.generalInfoP_hr}/>}
+  </div>
   
   )
 }

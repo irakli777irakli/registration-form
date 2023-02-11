@@ -6,24 +6,24 @@ import styles from './InfoSide.module.css'
 
 function ExperienceP() {
 
-    const {experienceAndEducation} = useGlobalContext();
+    const {experienceAndEducation,pageNumber} = useGlobalContext();
 
     useEffect(() => {},[experienceAndEducation]);
   return (
     <section className={styles.experienceP}>
-        <TitleHero>
+         {pageNumber >=2 && <TitleHero>
             გამოცდილება
-        </TitleHero>
+        </TitleHero>}
         <div className={styles.experienceInfo_wrapper}>
-        {experienceAndEducation?.experience.map((el,i) => {
+        {pageNumber >=2 && experienceAndEducation?.experience.map((el,i) => {
             return (
                 <ExperiencePContent key={i} content={el} contentType={"experience"}/>
             )
         })}
-         <TitleHero>
+         {pageNumber >=3 && <TitleHero>
             განათლება
-        </TitleHero>
-        {experienceAndEducation?.education.map((el,i) => {
+        </TitleHero>}
+        {pageNumber >=3 && experienceAndEducation?.education.map((el,i) => {
             
             return <ExperiencePContent key={i} content={el} contentType={"education"}/>
         })}

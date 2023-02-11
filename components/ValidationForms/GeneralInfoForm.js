@@ -19,14 +19,14 @@ import styles from './Validation.module.css';
 function GeneralInfoForm() {
   const router = useRouter();
 
-  const {generalInfo,setGeneralInfo,getFromLC,exprerience,setExperience} = useGlobalContext();
+  const {generalInfo,setGeneralInfo,getFromLC,exprerience,setExperience,pageNumber} = useGlobalContext();
   
   function handleSubmit(e){
     e.preventDefault();
     let startErrorTime, stopErrorTime;
     if(generalInfo["name"][1] && generalInfo["surname"][1] &&
      generalInfo["photo"][1] && generalInfo["email"][1] && generalInfo["phoneNumber"][1]){
-      const path = urlNavigator(1)
+      const path = urlNavigator(2)
       router.push(path);
      }else{
       

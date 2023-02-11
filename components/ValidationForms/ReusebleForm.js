@@ -42,7 +42,7 @@ function ReusebleForm({fieldType,inputName,inputPlaceholder,specStyle, onlyTextA
   else if(iName === "photo"){
     const fr = new FileReader();
     // you are reading value from state
-    console.log(value)
+    // console.log(value)
     fr.readAsDataURL(value);
 
     fr.addEventListener("load",() => {

@@ -4,10 +4,19 @@
     width: 50%;
     align-self: stretch;
 }
+.generalInfoP_hr_wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 1rem;
+}
 .generalInfoP_wrapper{
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+}
+.generalInfoP_hr{
+    border: 1px solid #C8C8C8;
 }
 .isResume {
     border: 0.8px solid #000000;

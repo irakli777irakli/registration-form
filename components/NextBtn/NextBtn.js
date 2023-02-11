@@ -1,7 +1,23 @@
 import styles from './NextBtn.module.css';
+import { useRouter } from 'next/router';
+import { useGlobalContext } from '@/context';
+import { urlNavigator } from '@/utils/helper';
 function NextBtn({next,text}) {
+  const router = useRouter();
+  const {pageNumber} = useGlobalContext();
+  function goToPevPage(){
+    console.log("exe",pageNumber)
+    const path = urlNavigator(pageNumber - 1);
+    
+    router.push(path);
+  }
+
+
   return (
-    <button type={next ? "submit" : "button"} className={next ? styles.sumbit_btn : styles.prev_btn}>
+    <button type={next ? "submit" : "button"}
+     className={next ? styles.sumbit_btn : styles.prev_btn}
+     onClick={() => {!false && goToPevPage()}}
+     >
         {text}
     </button>
   )
