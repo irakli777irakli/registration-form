@@ -1,10 +1,10 @@
 import InfoSide from '@/components/InfoPage/InfoSide'
-import { useGlobalContext } from '@/context'
+import { useGlobalContext } from '../../context'
 import React, { useEffect } from 'react'
 
-function index() {
+function Result() {
   
-  const {resume,successPopUp,setSuccessPopUp} = useGlobalContext();
+  const {successPopUp,setSuccessPopUp} = useGlobalContext();
   useEffect(()=>{},[successPopUp]);
     return (
     <div className='resume'>
@@ -18,5 +18,4 @@ function index() {
     </div>
   )
 }
-
-export default index
+export default Result
