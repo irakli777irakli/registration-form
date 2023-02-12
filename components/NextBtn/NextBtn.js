@@ -6,7 +6,7 @@ function NextBtn({next,text}) {
   const router = useRouter();
   const {pageNumber} = useGlobalContext();
   function goToPevPage(){
-    console.log("exe",pageNumber)
+    
     const path = urlNavigator(pageNumber - 1);
     
     router.push(path);

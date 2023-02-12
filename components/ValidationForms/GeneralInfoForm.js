@@ -8,14 +8,6 @@ import ReusebleForm from './ReusebleForm';
 import styles from './Validation.module.css';
 
 
- // function goToPrevPage() {
-    //     const exists = possibleRoutes.indexOf(`/${pageName}/${numeric}`)
-    //     if(exists === -1 || exists === 0){
-    //         router.push("/")
-    //     }else{
-    //         router.push(possibleRoutes[exists - 1]);
-    //     }
-    // }
 function GeneralInfoForm() {
   const router = useRouter();
 
@@ -26,7 +18,7 @@ function GeneralInfoForm() {
     let startErrorTime, stopErrorTime;
     if(generalInfo["name"][1] && generalInfo["surname"][1] &&
      generalInfo["photo"][1] && generalInfo["email"][1] && generalInfo["phoneNumber"][1]){
-      const path = urlNavigator(2)
+      const path = urlNavigator(pageNumber+1 || 2)
       router.push(path);
      }else{
       
@@ -41,6 +33,7 @@ function GeneralInfoForm() {
      function checkInput(on){
       let notValid;
       notValid = (generalInfo["name"][1] === false) ?generalInfo["name"][2] = on : null
+      
       checkIfValid(notValid)
       notValid = (generalInfo["surname"][1] === false) ?generalInfo["surname"][2] = on : null
       checkIfValid(notValid)
@@ -55,8 +48,7 @@ function GeneralInfoForm() {
      function checkIfValid(isValid){
       if(isValid === null) return
       setGeneralInfo({...generalInfo,isValid})
-      
-      
+    
      }
    
   }

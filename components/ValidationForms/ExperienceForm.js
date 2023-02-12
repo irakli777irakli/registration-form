@@ -8,10 +8,13 @@ import NextBtn from '../NextBtn/NextBtn';
 import { useRouter } from 'next/router';
 import { urlNavigator } from '@/utils/helper';
 
+const experienceArr = ["position","employer","job_start_date","job_end_date","description"]
+const educationalArr = ["school","degree","school_end_date","ed_desc"]
+
 function ExperienceForm({currentPageName}) {
   const router = useRouter();
 
-  const {experienceAndEducation,getSendingData,resume,setResume} = useGlobalContext();
+  const {setExperienceAndEducation, experienceAndEducation,getSendingData,resume,setResume,pageNumber} = useGlobalContext();
   useEffect(() => {},[experienceAndEducation?.experience?.length
      || experienceAndEducation?.education?.length])
 
@@ -64,40 +67,115 @@ function ExperienceForm({currentPageName}) {
         
     }
 
+    function multiErrorLogic(value,expOrEdu,onOff){
+      value.map((el,i)=>{
+        if(expOrEdu ==="experience"){
+          const {position,employer,job_start_date,job_end_date,description} = el;
+          position[1] === false ? position[2] = onOff : null;
+          employer[1] === false ? employer[2] = onOff : null;
+          job_start_date[1] === false ? job_start_date[2] = onOff : null;
+          job_end_date[1] === false ? job_end_date[2] = onOff : null;
+          description[1] === false ? description[2] = onOff : null;
+      }else{
+        const {school,degree,school_end_date,ed_desc} = el;
+        school[1] === false ? school[2] = onOff : null;
+        degree[1] === false ? degree[2] = onOff : null;
+        school_end_date[1] === false ? school_end_date[2] = onOff : null;
+        ed_desc[1] === false ? ed_desc[2] = onOff : null;
+      }
+      });
+      if(expOrEdu ==="experience"){
+        setExperienceAndEducation({...experienceAndEducation,experience:value})
+      }else{
+        setExperienceAndEducation({...experienceAndEducation,education:value})
+
+      }
+    }
+
+
+    function errorMultipleParts(value,expOrEdu,onOff,time1){
+      setTimeout(()=> {
+        multiErrorLogic(value,expOrEdu,onOff)
+      },time1)
+      
+     
+    }
+
+    function errorAddedFields(expOrEdu){
+      let value = experienceAndEducation[`${expOrEdu}`].slice();
+      errorMultipleParts(value,expOrEdu,true,2000)
+      errorMultipleParts(value,expOrEdu,false,5000)
+    }
+
+    function erroOut(fieldValue,expOrEdu,value,onOff){
+      const propArr = expOrEdu === "experience" ? experienceArr : educationalArr
+      fieldValue.map((el,i) => {
+        if(el === false){
+          value[0][`${propArr[i]}`][2] = onOff;
+        }
+      });
+      setExperienceAndEducation({...experienceAndEducation,education:value})
+    }
+
+    function ErrorInvalidFields(fieldValue,expOrEdu,time1,time2){
+      let value = experienceAndEducation[`${expOrEdu}`].slice();
+      setTimeout(()=> {
+        erroOut(fieldValue,expOrEdu,value,true)
+      },time1);
+      setTimeout(()=> {
+        erroOut(fieldValue,expOrEdu,value,false)
+      },time2);
+      
+    }
+
   async function handleSubmit(e){
     e.preventDefault();
     let path;
+    let checkSingleField;
     if(currentPageName === "experience"){
-      path = urlNavigator(3);
+      path = urlNavigator(pageNumber+1 || 3);
       if(experienceAndEducation?.experience?.length === 1){
         
-        const checkSingleField = checkValidFields("experience","exp",true)
+        checkSingleField = checkValidFields("experience","exp",true)
        
         const areFieldsValid = checkSingleField[0].every((el) => el === true);
         
         if(areFieldsValid){
           router.push(path);
+        }else{    
+          // single field error
+          ErrorInvalidFields(checkSingleField[0],"experience",2000,5000);
+
         }
       }else{
        const checkEveryField = checkValidFields("experience","exp",false);
        if(!checkEveryField.flat().includes(false)){
         router.push(path);
+       }else{
+        // multiple experience error
+        errorAddedFields("experience")
        }
       }
     }
     // educational part
     else{
-      path = urlNavigator(4);
+      path = urlNavigator(pageNumber+1 || 4);
       if(experienceAndEducation?.education?.length === 1){
         const checkFirstEduFields = checkValidFields("education","edu",true)
          const areFieldsValid = checkFirstEduFields[0].every((el) => el === true);
         if(areFieldsValid){
           finish(path)
+        }else{
+          // add error logic for single input
+          ErrorInvalidFields(checkFirstEduFields[0],"education",2000,5000);
         }
       }else{
         const checkAllEduFields = checkValidFields("education","edu",false);
         if(!checkAllEduFields.flat().includes(false)){
           finish(path)
+         }else{
+          // add error logic for multilple
+          errorAddedFields("education")
          }
       }
     }
