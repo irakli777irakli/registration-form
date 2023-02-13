@@ -6,10 +6,10 @@ import { useGlobalContext } from '@/context';
 function ZadniBtn({hidden = false}) {
     const {goZadni} = useGlobalContext();
     const router = useRouter();
-    function goToInitialPage() {
+    async function goToInitialPage() {
             
         router.push("/")    
-        goZadni();    
+        await goZadni();    
     }
 
     return (

@@ -128,6 +128,7 @@ function Exp_Edu_Reusable({isSelect,currentFieldId,whichPage,fieldType,inputName
   </select> 
   : 
   <input 
+  
   className={`${styles[specStyle]} ${getInputValue(false,2) ? (getInputValue(true) ? `${styles.border_success}` : `${styles.border_error}`):null} `}  
   type={`${fieldType}`}
      value={getInputValue()} placeholder={inputPlaceholder}

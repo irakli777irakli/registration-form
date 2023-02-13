@@ -6,6 +6,7 @@
     display: flex;
     flex-direction: row;
     gap: 2rem;
+align-items: stretch;    
   }
   
   .go_back_btn{
@@ -21,12 +22,14 @@
   }
   .title_hr_wrapper{
     width: 45%;
+    align-self: stretch;
   }
   .title_pageIndxer{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
   .pageNumber{
     color: #1A1A1A;

@@ -17,6 +17,9 @@ function ExperiencePContent({content,contentType}) {
       <div>
           <p className={styles.textAreaContent}>{contentType === "experience" ? content?.description[0]: content?.ed_desc[0]}</p>
       </div>
+      {contentType === "experience" ? (content?.position[1] && content?.employer[1] && content?.job_start_date[1] && content?.job_end_date[1] && content?.description[1]) &&<hr className={styles.generalInfoP_hr} /> :
+      (content?.school[1] && content?.degree[1] && content?.school_end_date[1] && content?.ed_desc[1]) && <hr className={styles.generalInfoP_hr} />}
+      
 </div>
   )
 }

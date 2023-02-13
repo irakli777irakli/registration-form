@@ -13,12 +13,14 @@ function GeneralInfoP() {
 
 
   return (
-    <div className={styles.generalInfoP_hr_wrapper}>
+    <div className={styles.generalInfoP_parent}>
     <div className={styles.generalInfoP_wrapper}>
         <div className={styles.generalInfoP_l}>
-            <TitleHero color={"red"}>
-            {generalInfo?.name[0]} {generalInfo?.surname[0]}
-            </TitleHero>
+            <div className={styles.name_surname_wrapper}>
+                <TitleHero color={"red"}>
+                {generalInfo?.name[0]} {generalInfo?.surname[0]}
+                </TitleHero>
+            </div>
         <div className={styles.number_email_wrapper}>
             {generalInfo?.email[2] && <span className={styles.email}>@ {generalInfo?.email[0]}</span>}
             {generalInfo?.phoneNumber[2] && <span className={styles.phone_Number}>📞 {generalInfo?.phoneNumber[0]}</span>}

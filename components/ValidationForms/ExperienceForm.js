@@ -46,23 +46,30 @@ function ExperienceForm({currentPageName}) {
       return fieldbool;
     }
 
-    async function finish(pt){
+    async function finish(){
 
       const dataForSending =  getSendingData();
       
       console.log(dataForSending);
+      try{
+
+    
        const respose = await fetch("https://resume.redberryinternship.ge/api/cvs",{
-            method:"POST",
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dataForSending)
+        headers: {
+          'Accept': 'multipart/form-data',
+          'Content-Type': 'multipart/form-data'
+        },
+        method: "POST",
+            body: JSON.stringify(dataForSending),
           });
           const data = await respose.json();
           console.log(data);
+        }
+        catch(e){
+         router.push(urlNavigator(pageNumber + 1))
+        }
 
-          // continue from here
+         // continue from here
 
         
     }

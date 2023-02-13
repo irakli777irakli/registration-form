@@ -3,18 +3,23 @@ const geo = ["ა","ბ","გ","დ","ე","ვ",
 "მ","ნ","ო","პ","ჟ","რ",
 "ს","ტ","უ","ფ","ქ","ღ","ყ",
 "შ","ჩ","ც","ძ","წ",
-"ჭ","ხ","ჯ","ჰ"
+"ჭ","ხ","ჯ","ჰ",
 ]
 
 
 
 export function georgianCheck(value){
-    for(let i=0;i<value?.length;i++){
+    
+    const textLength =  value?.length;
+    for(let i=0;i<textLength;i++){
+        // ირაკლი ლომი
         if(!geo.includes(value[i])){
             return false;
         }
     }
-    if(value?.length >= 2){
+    
+   console.log(value)
+    if(textLength >= 2){
         return true;
     }
     return false;
@@ -54,7 +59,12 @@ export function phoneNumberChecker(value){
     postNumCheck = true;
         }
         if(preNumCheck && postNumCheck && arrWithoutDashes.length === 13){
-            //console.log("executed")
+            // shifting arr items like this is not good for `time & space` complexity
+            arrWithoutDashes.splice(4,0," ")
+            for(let i=8;i<=14;i+=3){
+                arrWithoutDashes.splice(i,0," ")
+            }
+            
             let finalOutput = arrWithoutDashes.join("");
             
             
@@ -100,5 +110,68 @@ export function urlNavigator(index){
 //         }
 //     }
 //     preNumCheck = true;
+
+
+export function getFormatedNumber(number){
+    return number.split(" ").join("")
+
+}
+
+export const gInfo = {
+    name: ["",false,false],
+    surname: ["",false,false],
+    photo: ["",false,false],
+    aboutMe: [""],
+    email: ["",false,false],
+    phoneNumber: ["",false,false],
+  }
+
+export const eXperience = {
+    id: 0,
+    position: ["",false,false],
+    employer: ["",false,false],
+    job_start_date: ["",false,false],
+    job_end_date: ["",false,false],
+    description: ["",false,false]
+}
+export const eDucation = {
+    id: 0,
+      school: ["",false,false],
+      degree: ["",false,false],
+      school_end_date: ["",false,false],
+      ed_desc: ["",false,false]
+}
+
+
+
+export function makeExpDefault(emptyExp){
+    const defaulltedOne = emptyExp.map((el)=> {
+    return {
+    id: 0,
+    position: ["",false,false],
+    employer: ["",false,false],
+    job_start_date: ["",false,false],
+    job_end_date: ["",false,false],
+    description: ["",false,false]
+        }
+    });
+    return defaulltedOne;
+}
+export function makeEduDefault(emptyEdu){
+    const defaultOne = emptyEdu.map((el) => {
+        const {id,school,degree,school_end_date,ed_desc} = el;
+        return {
+            id: 0,
+            school: ["",false,false],
+            degree:["",false,false,degree[3]],
+            school_end_date: ["",false,false],
+            ed_desc: ["",false,false]
+        }
+    });
+
+    return defaultOne
+}
+
+
     
     

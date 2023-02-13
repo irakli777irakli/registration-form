@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import styles from './Validation.module.css';
 
-function ReusebleForm({fieldType,inputName,inputPlaceholder,specStyle, onlyTextArea = false,acceptance}) {
+function ReusebleForm({maxLength,fieldType,inputName,inputPlaceholder,specStyle, onlyTextArea = false,acceptance}) {
 
   const {generalInfo,setGeneralInfo,getFromLC,exprerience,setExperience} = useGlobalContext();
 
@@ -29,8 +29,6 @@ function ReusebleForm({fieldType,inputName,inputPlaceholder,specStyle, onlyTextA
  
   isOveralValueEmpty = (value?.length > 0 || iName === "photo" )? errorSuccess(true,2) : errorSuccess(false,2); 
   
-
-
   if(iName === "name"){
     isGeo = georgianCheck(value);
     state = errorSuccess(isGeo,1)
@@ -108,6 +106,7 @@ function ReusebleForm({fieldType,inputName,inputPlaceholder,specStyle, onlyTextA
   
     <div style={{position:"relative",width:"100%"}}>
       <input 
+       maxLength={maxLength}
       className={`${styles[specStyle]} 
       ${generalInfo[inputName][2] ? generalInfo[inputName][1] ? `${styles.border_success}` : `${styles.border_error}` : null}`}
       accept={acceptance}

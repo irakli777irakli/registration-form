@@ -61,12 +61,12 @@ function GeneralInfoForm() {
       <div className={styles.name_surname_wrapper}>
         <div className={styles.name_wrapper}>
           <Hero>სახელი</Hero>
-          <ReusebleForm currentPage={generalInfo} specStyle={"half_input"} fieldType={"text"} inputName={"name"} inputPlaceholder={"ანზორ"}/>
+          <ReusebleForm currentPage={generalInfo} specStyle={"half_input"} fieldType={"text"} inputName={"name"} inputPlaceholder={"ანზორ"} maxLength={"14"}/>
           <Hero twoLetter={true}>მინიმუმ 2 ასო, ქართული ასოები</Hero>
         </div>
         <div className={styles.surname_wrapper}>
           <Hero>გვარი</Hero>
-          <ReusebleForm currentPage={generalInfo} specStyle={"half_input"} fieldType={"text"} inputName={"surname"} inputPlaceholder={"მუმლაძე"}/>
+          <ReusebleForm currentPage={generalInfo} specStyle={"half_input"} fieldType={"text"} inputName={"surname"} inputPlaceholder={"მუმლაძე"} maxLength={"14"}/>
           <Hero twoLetter={true}>მინიმუმ 2 ასო, ქართული ასოები</Hero>
         </div>
       </div>
@@ -85,14 +85,14 @@ function GeneralInfoForm() {
           <Hero>
             ელ.ფოსტა
           </Hero>
-          <ReusebleForm currentPage={generalInfo} specStyle={"full_input"} fieldType={"email"} inputName={"email"} inputPlaceholder={"anzor666@redberry.ge"}/>
+          <ReusebleForm currentPage={generalInfo} specStyle={"full_input"} fieldType={"email"} inputName={"email"} inputPlaceholder={"anzor666@redberry.ge"} maxLength={"40"}/>
           <Hero twoLetter={true}>უნდა მთავრდებოდეს @redberry.ge-ით</Hero>
         </div>
         <div>
           <Hero>
             მობილურის ნომერი
           </Hero>
-          <ReusebleForm currentPage={generalInfo} specStyle={"full_input"} fieldType={"text"} inputName={"phoneNumber"} inputPlaceholder={"+995 3551 12 34 56"}/>
+          <ReusebleForm currentPage={generalInfo} specStyle={"full_input"} fieldType={"text"} inputName={"phoneNumber"} inputPlaceholder={"+995 3551 12 34 56"} maxLength={"20"}/>
           <Hero twoLetter={true}>უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს</Hero>
         </div>
         </div>
